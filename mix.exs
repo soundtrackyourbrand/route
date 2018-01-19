@@ -1,17 +1,17 @@
-defmodule RouteHost.Mixfile do
+defmodule Route.Mixfile do
   use Mix.Project
 
   @version "1.0.0"
 
   def project do
     [
-      app: :route_host,
+      app: :route,
       version: @version,
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
       deps: deps(),
       package: package(),
-      description: "Route requests based on host for plug/phoenix"
+      description: "Route macro for routing to multiple routers in phoenix endpoint (or plug router)"
     ]
   end
 
@@ -31,7 +31,7 @@ defmodule RouteHost.Mixfile do
     %{
       licence: ["MIT"],
       maintainers: ["Fredrik Enestad"],
-      links: %{"GitHub" => "https://github.com/soundtrackyourbrand/route_host"}
+      links: %{"GitHub" => "https://github.com/soundtrackyourbrand/route"}
     }
   end
 end

@@ -1,51 +1,31 @@
-# RouteHost
+# Route
 
-Route requests based on host for plug and phoenix
-
-## Usage
-
-In your base router (or Endpoint in phoenix), use `RouteHost` and then route requests based on host to other routers. 
-
-It uses the [host matcher](https://github.com/elixir-plug/plug/blob/master/lib/plug/router/utils.ex#L25-L43) from [elixir-plug](https://github.com/elixir-plug/plug)
+Elixir macro for routing to multiple routers from phoenix endpoint (or plug router)
 
 ## Example
 
 ```elixir
-defmodule Router do
-  use Plug.Router
-  use RouteHost
+defmodule Endpoint do
+  use Phoenix.Endpoint, otp_app: :my_app
+  use Route
 
-  plug :match
-  plug :dispatch
-
-  route_host "api.", APIRouter
-  route_host nil, DefaultRouter
-
-  match _ do
-    conn
-  end
+  route host: "api.", API.Router
+  plug Web.Router
 end
 
-defmodule APIRouter do
-  use Plug.Router
-
-  plug :match
-  plug :dispatch
+defmodule API.Router do
+  use MyApp.Web, :router
 
   get "/" do
     resp(conn, 200, "hello api")
-  end	
+  end
 end
 
-defmodule DefaultRouter do
-  use Plug.Router
-
-  plug :match
-  plug :dispatch
+defmodule Web.Router do
+  use MyApp.Web, :router
 
   get "/" do
-    resp(conn, 200, "hello default")
-  end	
+    resp(conn, 200, "hello web")
+  end
 end
-
 ```
