@@ -1,4 +1,8 @@
 defmodule Route do
+  @moduledoc """
+  Route macro for routing to multiple routers in phoenix endpoint (or a plug router)",
+  """
+
   @doc false
   defmacro __using__(_opts) do
     quote do
@@ -31,6 +35,19 @@ defmodule Route do
     end)
   end
 
+  @doc """
+  Route requests to a router
+
+  ## Examples
+      route host: "api.", to: MyAPIRouter
+      route path: "/admin", to: MyAdminRouter
+      route to: MyDefaultRouter
+  ## Options
+  `route/1` accept the following options:
+    * `:host` - the host which the route should match. Defaults to `nil`
+    * `:path` - the path which the route should match. Defaults to `""`
+    * `:to` - a Plug that will be called in case the route matches.
+  """
   defmacro route(opts) do
     router = Keyword.fetch!(opts, :to)
     path = Keyword.get(opts, :path, "")
