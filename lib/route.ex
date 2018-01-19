@@ -36,14 +36,14 @@ defmodule Route do
   end
 
   @doc """
-  Route requests to a router
+  Route requests to a router, accepts several `opts` described below
 
   ## Examples
       route host: "api.", to: MyAPIRouter
       route path: "/admin", to: MyAdminRouter
       route to: MyDefaultRouter
   ## Options
-  `route/1` accept the following opts:
+  `route/1` accept the following `opts`:
     * `:host` - the host which the route should match. Defaults to `nil`
     * `:path` - the path which the route should match. Defaults to `""`
     * `:to` - a Plug that will be called in case the route matches. Required
