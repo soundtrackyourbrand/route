@@ -1,6 +1,6 @@
 defmodule Route do
   @moduledoc """
-  Route macro for routing to multiple routers in phoenix endpoint (or a plug router)",
+  Route macro for routing to multiple routers in phoenix endpoint (or a plug router)
   """
 
   @doc false
