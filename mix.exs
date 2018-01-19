@@ -2,6 +2,7 @@ defmodule Route.Mixfile do
   use Mix.Project
 
   @version "1.0.0"
+  @url "https://github.com/soundtrackyourbrand/route"
 
   def project do
     [
@@ -9,9 +10,14 @@ defmodule Route.Mixfile do
       version: @version,
       elixir: "~> 1.5",
       start_permanent: Mix.env == :prod,
+      build_embedded: Mix.env == :prod,
       deps: deps(),
       package: package(),
-      description: "Route macro for routing to multiple routers in phoenix endpoint (or plug router)"
+      description: "Route macro for routing to multiple routers in phoenix endpoint (or a plug router)",
+      docs: [
+        source_ref: "v#{@version}",
+        source_url: @url
+      ]
     ]
   end
 
@@ -23,7 +29,9 @@ defmodule Route.Mixfile do
 
   defp deps do
     [
-      {:plug, "~> 1.4"}
+      {:plug, "~> 1.4"},
+      {:ex_doc, "~> 0.18", only: [:docs, :dev]},
+      {:inch_ex, "~> 0.5", only: [:docs, :dev]}
     ]
   end
 
@@ -31,7 +39,7 @@ defmodule Route.Mixfile do
     %{
       licence: ["MIT"],
       maintainers: ["Fredrik Enestad"],
-      links: %{"GitHub" => "https://github.com/soundtrackyourbrand/route"}
+      links: %{"GitHub" => @url}
     }
   end
 end
