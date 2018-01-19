@@ -1,4 +1,6 @@
 # Route
+[![Build Status](https://api.travis-ci.org/soundtrackyourbrand/route.svg)](https://travis-ci.org/soundtrackyourbrand/route)
+[![Inline docs](http://inch-ci.org/github/soundtrackyourbrand/route.svg)](http://inch-ci.org/github/soundtrackyourbrand/route)
 
 Elixir macro for routing to multiple routers from phoenix endpoint (or a plug router)
 
