@@ -1,6 +1,6 @@
 # Route
 
-Elixir macro for routing to multiple routers from phoenix endpoint (or plug router)
+Elixir macro for routing to multiple routers from phoenix endpoint (or a plug router)
 
 ## Example
 
