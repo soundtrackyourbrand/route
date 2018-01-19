@@ -43,10 +43,10 @@ defmodule Route do
       route path: "/admin", to: MyAdminRouter
       route to: MyDefaultRouter
   ## Options
-  `route/1` accept the following options:
+  `route/1` accept the following opts:
     * `:host` - the host which the route should match. Defaults to `nil`
     * `:path` - the path which the route should match. Defaults to `""`
-    * `:to` - a Plug that will be called in case the route matches.
+    * `:to` - a Plug that will be called in case the route matches. Required
   """
   defmacro route(opts) do
     router = Keyword.fetch!(opts, :to)
