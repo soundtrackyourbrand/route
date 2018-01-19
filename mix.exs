@@ -37,7 +37,7 @@ defmodule Route.Mixfile do
 
   defp package do
     %{
-      licence: ["MIT"],
+      licenses: ["MIT"],
       maintainers: ["Fredrik Enestad"],
       links: %{"GitHub" => @url}
     }
