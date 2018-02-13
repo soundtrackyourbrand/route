@@ -4,6 +4,8 @@
 
 Elixir macro for routing to multiple routers from phoenix endpoint (or a plug router)
 
+[Documentation for route is available online](https://hexdocs.pm/route/).
+
 ## Example
 
 ```elixir
