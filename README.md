@@ -41,3 +41,14 @@ defmodule Web.Admin do
 end
 
 ```
+
+
+## Installation
+
+Add route to your `mix.exs` dependencies:
+
+```elixir
+def deps do
+  [{:route, "~> 1.0"}]
+end
+```
