@@ -30,7 +30,7 @@ defmodule Route.Mixfile do
 
   defp deps do
     [
-      {:plug, "~> 1.4"},
+      {:plug, "~> 1.5"},
       {:ex_doc, "~> 0.18", only: [:docs, :dev]},
       {:inch_ex, "~> 0.5", only: [:docs, :dev]}
     ]

@@ -6,7 +6,6 @@ defmodule Route do
   @doc false
   defmacro __using__(_opts) do
     quote do
-      @behaviour Plug
       def init(opts), do: opts
 
       def call(conn, opts) do
@@ -25,15 +24,18 @@ defmodule Route do
     Module.get_attribute(env.module, :routes)
     |> Enum.reverse()
     |> Enum.map(fn {path, host, router} ->
+      route_path = path <> "/*glob"
       host_match = Plug.Router.Utils.build_host_match(host)
-      {_, path_match} = Plug.Router.Utils.build_path_match(path <> "/*glob")
+      {_, path_match} = Plug.Router.Utils.build_path_match(route_path)
 
       quote do
         def route_plug(
               %Plug.Conn{host: unquote(host_match), path_info: unquote(path_match)} = conn,
               opts
             ) do
-          Plug.Router.Utils.forward(conn, var!(glob), unquote(router), opts)
+          conn
+          |> Plug.Conn.put_private(:plug_route, {unquote(route_path), nil})
+          |> Plug.Router.Utils.forward(var!(glob), unquote(router), opts)
         end
       end
     end)
