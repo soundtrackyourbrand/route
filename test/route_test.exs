@@ -7,8 +7,8 @@ defmodule RouteTest do
   defmodule API do
     use Plug.Router
 
-    plug :match
-    plug :dispatch
+    plug(:match)
+    plug(:dispatch)
 
     get "/" do
       resp(conn, 200, "api")
@@ -18,8 +18,8 @@ defmodule RouteTest do
   defmodule Host do
     use Plug.Router
 
-    plug :match
-    plug :dispatch
+    plug(:match)
+    plug(:dispatch)
 
     get "/" do
       resp(conn, 200, "host")
@@ -29,12 +29,13 @@ defmodule RouteTest do
   defmodule Path do
     use Plug.Router
 
-    plug :match
-    plug :dispatch
+    plug(:match)
+    plug(:dispatch)
 
     get "/sub" do
       resp(conn, 200, "subpath")
     end
+
     get "/" do
       resp(conn, 200, "path")
     end
@@ -43,8 +44,8 @@ defmodule RouteTest do
   defmodule HostPath do
     use Plug.Router
 
-    plug :match
-    plug :dispatch
+    plug(:match)
+    plug(:dispatch)
 
     get "/" do
       resp(conn, 200, "host+path")
@@ -55,13 +56,13 @@ defmodule RouteTest do
     use Plug.Router
     use Route
 
-    plug :match
-    plug :dispatch
+    plug(:match)
+    plug(:dispatch)
 
-    route host: "api.", to: RouteTest.API
-    route host: "host.", path: "path", to: RouteTest.HostPath
-    route host: "host.example.com", to: RouteTest.Host
-    route path: "/path", to: RouteTest.Path
+    route(host: "api.", to: RouteTest.API)
+    route(host: "host.", path: "path", to: RouteTest.HostPath)
+    route(host: "host.example.com", to: RouteTest.Host)
+    route(path: "/path", to: RouteTest.Path)
 
     match _ do
       conn
@@ -71,16 +72,22 @@ defmodule RouteTest do
   test "routes to router based on subdomain" do
     assert call(RouteTest.Router, conn(:get, "http://api.example.com/")).resp_body == "api"
   end
+
   test "routes to router based on full hostname" do
     assert call(RouteTest.Router, conn(:get, "http://host.example.com/")).resp_body == "host"
   end
+
   test "routes based on path" do
-    assert call(RouteTest.Router, conn(:get, "http://example.com/path/sub")).resp_body == "subpath"
+    assert call(RouteTest.Router, conn(:get, "http://example.com/path/sub")).resp_body ==
+             "subpath"
+
     assert call(RouteTest.Router, conn(:get, "http://example.com/path")).resp_body == "path"
     assert call(RouteTest.Router, conn(:get, "http://example.com/path/")).resp_body == "path"
   end
+
   test "routes based on both path and host" do
-    assert call(RouteTest.Router, conn(:get, "http://host.example.com/path")).resp_body == "host+path"
+    assert call(RouteTest.Router, conn(:get, "http://host.example.com/path")).resp_body ==
+             "host+path"
   end
 
   defp call(mod, conn) do

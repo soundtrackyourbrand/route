@@ -9,11 +9,12 @@ defmodule Route.Mixfile do
       app: :route,
       version: @version,
       elixir: "~> 1.5",
-      start_permanent: Mix.env == :prod,
-      build_embedded: Mix.env == :prod,
+      start_permanent: Mix.env() == :prod,
+      build_embedded: Mix.env() == :prod,
       deps: deps(),
       package: package(),
-      description: "Route macro for routing to multiple routers in phoenix endpoint (or a plug router)",
+      description:
+        "Route macro for routing to multiple routers in phoenix endpoint (or a plug router)",
       docs: [
         source_ref: "v#{@version}",
         source_url: @url
